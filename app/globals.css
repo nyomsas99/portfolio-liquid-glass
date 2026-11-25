@@ -1,0 +1,335 @@
+@import "tailwindcss";
+
+/* ==========================================
+   1. TEMA WARNA LIQUID GLASS (DARK MODE DEFAULT)
+   ========================================== */
+:root,
+[data-theme="ocean"] {
+  --bg-base: #060913;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --glass-bg-1: rgba(56, 189, 248, 0.12);
+  --glass-bg-2: rgba(255, 255, 255, 0.04);
+  --glass-bg-3: rgba(99, 102, 241, 0.1);
+  --glass-border: rgba(186, 230, 253, 0.24);
+  --glass-border-hover: rgba(125, 211, 252, 0.48);
+  --glass-highlight: rgba(255, 255, 255, 0.45);
+  --nav-bg: rgba(8, 14, 28, 0.82);
+
+  --accent-primary: #67e8f9;
+  --accent-secondary: #a5b4fc;
+  --accent-soft: rgba(34, 211, 238, 0.14);
+  --btn-bg: #ffffff;
+  --btn-text: #090d16;
+  --btn-glow: rgba(103, 232, 249, 0.35);
+
+  --blob-1: rgba(6, 182, 212, 0.36);
+  --blob-2: rgba(99, 102, 241, 0.32);
+  --blob-3: rgba(16, 185, 129, 0.24);
+  color-scheme: dark;
+}
+
+[data-theme="lavender"] {
+  --bg-base: #0e0716;
+  --text-primary: #fdf4ff;
+  --text-secondary: #e9d5ff;
+  --text-muted: #c084fc;
+
+  --glass-bg-1: rgba(217, 70, 239, 0.13);
+  --glass-bg-2: rgba(255, 255, 255, 0.04);
+  --glass-bg-3: rgba(244, 114, 182, 0.11);
+  --glass-border: rgba(245, 208, 254, 0.25);
+  --glass-border-hover: rgba(240, 171, 252, 0.5);
+  --glass-highlight: rgba(253, 244, 255, 0.45);
+  --nav-bg: rgba(20, 10, 32, 0.84);
+
+  --accent-primary: #f0abfc;
+  --accent-secondary: #f9a8d4;
+  --accent-soft: rgba(232, 121, 249, 0.15);
+  --btn-bg: #fdf4ff;
+  --btn-text: #180826;
+  --btn-glow: rgba(240, 171, 252, 0.38);
+
+  --blob-1: rgba(192, 38, 211, 0.35);
+  --blob-2: rgba(236, 72, 153, 0.3);
+  --blob-3: rgba(139, 92, 246, 0.28);
+  color-scheme: dark;
+}
+
+[data-theme="emerald"] {
+  --bg-base: #04100d;
+  --text-primary: #ecfdf5;
+  --text-secondary: #a7f3d0;
+  --text-muted: #6ee7b7;
+
+  --glass-bg-1: rgba(16, 185, 129, 0.13);
+  --glass-bg-2: rgba(255, 255, 255, 0.04);
+  --glass-bg-3: rgba(20, 184, 166, 0.1);
+  --glass-border: rgba(167, 243, 208, 0.24);
+  --glass-border-hover: rgba(110, 231, 183, 0.48);
+  --glass-highlight: rgba(236, 253, 245, 0.45);
+  --nav-bg: rgba(6, 22, 18, 0.84);
+
+  --accent-primary: #6ee7b7;
+  --accent-secondary: #5eead4;
+  --accent-soft: rgba(52, 211, 153, 0.15);
+  --btn-bg: #ecfdf5;
+  --btn-text: #041510;
+  --btn-glow: rgba(110, 231, 183, 0.35);
+
+  --blob-1: rgba(16, 185, 129, 0.35);
+  --blob-2: rgba(13, 148, 136, 0.3);
+  --blob-3: rgba(132, 204, 22, 0.22);
+  color-scheme: dark;
+}
+
+[data-theme="ruby"] {
+  --bg-base: #13060a;
+  --text-primary: #fff1f2;
+  --text-secondary: #fecdd3;
+  --text-muted: #fda4af;
+
+  --glass-bg-1: rgba(244, 63, 94, 0.14);
+  --glass-bg-2: rgba(255, 255, 255, 0.04);
+  --glass-bg-3: rgba(251, 113, 133, 0.1);
+  --glass-border: rgba(254, 205, 211, 0.24);
+  --glass-border-hover: rgba(253, 164, 175, 0.48);
+  --glass-highlight: rgba(255, 241, 242, 0.45);
+  --nav-bg: rgba(26, 8, 14, 0.84);
+
+  --accent-primary: #fda4af;
+  --accent-secondary: #fdba74;
+  --accent-soft: rgba(244, 63, 94, 0.16);
+  --btn-bg: #fff1f2;
+  --btn-text: #1b070d;
+  --btn-glow: rgba(253, 164, 175, 0.38);
+
+  --blob-1: rgba(225, 29, 72, 0.36);
+  --blob-2: rgba(249, 115, 22, 0.26);
+  --blob-3: rgba(190, 24, 93, 0.3);
+  color-scheme: dark;
+}
+
+[data-theme="champagne"] {
+  --bg-base: #120e07;
+  --text-primary: #fffbeb;
+  --text-secondary: #fde68a;
+  --text-muted: #fcd34d;
+
+  --glass-bg-1: rgba(245, 158, 11, 0.14);
+  --glass-bg-2: rgba(255, 255, 255, 0.04);
+  --glass-bg-3: rgba(217, 119, 6, 0.1);
+  --glass-border: rgba(253, 230, 138, 0.25);
+  --glass-border-hover: rgba(252, 211, 77, 0.5);
+  --glass-highlight: rgba(255, 251, 235, 0.45);
+  --nav-bg: rgba(24, 18, 9, 0.84);
+
+  --accent-primary: #fcd34d;
+  --accent-secondary: #fdba74;
+  --accent-soft: rgba(245, 158, 11, 0.16);
+  --btn-bg: #fffbeb;
+  --btn-text: #191207;
+  --btn-glow: rgba(252, 211, 77, 0.38);
+
+  --blob-1: rgba(217, 119, 6, 0.36);
+  --blob-2: rgba(234, 88, 12, 0.28);
+  --blob-3: rgba(202, 138, 4, 0.26);
+  color-scheme: dark;
+}
+
+/* ==========================================
+   2. VARIASI LIGHT MODE UNTUK SETIAP TEMA
+   ========================================== */
+[data-mode="light"] {
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+
+  --glass-bg-1: rgba(255, 255, 255, 0.72);
+  --glass-bg-2: rgba(255, 255, 255, 0.48);
+  --glass-bg-3: rgba(255, 255, 255, 0.64);
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-highlight: rgba(255, 255, 255, 0.98);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+
+  --btn-bg: #0f172a;
+  --btn-text: #ffffff;
+  color-scheme: light;
+}
+
+[data-mode="light"][data-theme="ocean"] {
+  --bg-base: #eef6fc;
+  --glass-border-hover: rgba(2, 132, 199, 0.45);
+  --accent-primary: #0284c7;
+  --accent-secondary: #4f46e5;
+  --accent-soft: rgba(2, 132, 199, 0.12);
+  --btn-glow: rgba(2, 132, 199, 0.25);
+  --blob-1: rgba(56, 189, 248, 0.42);
+  --blob-2: rgba(129, 140, 248, 0.34);
+  --blob-3: rgba(45, 212, 191, 0.3);
+}
+
+[data-mode="light"][data-theme="lavender"] {
+  --bg-base: #f9f0fc;
+  --glass-border-hover: rgba(192, 38, 211, 0.42);
+  --accent-primary: #a21caf;
+  --accent-secondary: #db2777;
+  --accent-soft: rgba(192, 38, 211, 0.11);
+  --btn-glow: rgba(192, 38, 211, 0.25);
+  --blob-1: rgba(232, 121, 249, 0.4);
+  --blob-2: rgba(244, 114, 182, 0.34);
+  --blob-3: rgba(167, 139, 250, 0.32);
+}
+
+[data-mode="light"][data-theme="emerald"] {
+  --bg-base: #ecf9f4;
+  --glass-border-hover: rgba(5, 150, 105, 0.42);
+  --accent-primary: #047857;
+  --accent-secondary: #0d9488;
+  --accent-soft: rgba(16, 185, 129, 0.13);
+  --btn-glow: rgba(16, 185, 129, 0.25);
+  --blob-1: rgba(52, 211, 153, 0.4);
+  --blob-2: rgba(45, 212, 191, 0.32);
+  --blob-3: rgba(163, 230, 53, 0.28);
+}
+
+[data-mode="light"][data-theme="ruby"] {
+  --bg-base: #fff1f3;
+  --glass-border-hover: rgba(225, 29, 72, 0.42);
+  --accent-primary: #be123c;
+  --accent-secondary: #ea580c;
+  --accent-soft: rgba(225, 29, 72, 0.11);
+  --btn-glow: rgba(225, 29, 72, 0.25);
+  --blob-1: rgba(251, 113, 133, 0.42);
+  --blob-2: rgba(251, 146, 60, 0.32);
+  --blob-3: rgba(244, 114, 182, 0.3);
+}
+
+[data-mode="light"][data-theme="champagne"] {
+  --bg-base: #fdf8ec;
+  --glass-border-hover: rgba(217, 119, 6, 0.45);
+  --accent-primary: #b45309;
+  --accent-secondary: #c2410c;
+  --accent-soft: rgba(217, 119, 6, 0.12);
+  --btn-glow: rgba(217, 119, 6, 0.25);
+  --blob-1: rgba(251, 191, 36, 0.42);
+  --blob-2: rgba(251, 146, 60, 0.32);
+  --blob-3: rgba(250, 204, 21, 0.3);
+}
+
+@theme inline {
+  --color-background: var(--bg-base);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  transition: background-color 0.55s ease, color 0.55s ease;
+}
+
+/* Permukaan Utama Liquid Glass */
+.liquid-glass {
+  background: linear-gradient(
+    135deg,
+    var(--glass-bg-1) 0%,
+    var(--glass-bg-2) 50%,
+    var(--glass-bg-3) 100%
+  );
+  backdrop-filter: blur(24px) saturate(185%);
+  -webkit-backdrop-filter: blur(24px) saturate(185%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 1px 0 var(--glass-highlight),
+    inset 0 -1px 1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 40px -15px rgba(0, 0, 0, 0.28);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease,
+    background 0.55s ease,
+    box-shadow 0.55s ease;
+}
+
+.liquid-glass:hover {
+  border-color: var(--glass-border-hover);
+}
+
+/* Kapsul Tombol & Marquee Liquid */
+.liquid-pill {
+  background: var(--glass-bg-1);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0.5px var(--glass-highlight),
+    0 10px 25px -5px rgba(0, 0, 0, 0.22);
+  transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+/* Navbar Liquid Glass dengan Kontras Tinggi */
+.liquid-nav {
+  background: var(--nav-bg);
+  backdrop-filter: blur(24px) saturate(185%);
+  -webkit-backdrop-filter: blur(24px) saturate(185%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0.5px var(--glass-highlight),
+    0 12px 30px -5px rgba(0, 0, 0, 0.3);
+  transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+/* Animasi Fluid Blob Latar Belakang */
+@keyframes liquidMorph {
+  0%, 100% {
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+  33% {
+    border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
+    transform: translate(35px, -45px) rotate(120deg) scale(1.08);
+  }
+  66% {
+    border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+    transform: translate(-25px, 25px) rotate(240deg) scale(0.95);
+  }
+}
+
+.animate-liquid {
+  animation: liquidMorph 16s ease-in-out infinite;
+}
+
+.animate-liquid-slow {
+  animation: liquidMorph 22s ease-in-out infinite reverse;
+}
+
+/* Animasi Running Text (Satu Baris Horizontal Kanan ke Kiri) */
+@keyframes marqueeRightToLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-rtl {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: marqueeRightToLeft 24s linear infinite;
+}
+
+.animate-marquee-rtl:hover {
+  animation-play-state: paused;
+}
