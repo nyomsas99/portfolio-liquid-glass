@@ -27,6 +27,7 @@ import {
   ImageIcon,
   Wrench,
   Zap,
+  Menu,
 } from "lucide-react";
 
 // ==========================================
@@ -119,6 +120,8 @@ function TypewriterName({
     return () => clearTimeout(typingTimer);
   }, [started, displayedText, text, speed]);
 
+  const isDone = displayedText.length >= text.length;
+
   return (
     <span className="inline-flex items-center flex-wrap">
       <span
@@ -130,14 +133,15 @@ function TypewriterName({
       >
         {displayedText}
       </span>
-      <span
-        aria-hidden="true"
-        className="inline-block w-[3px] sm:w-[4px] h-[0.95em] ml-1.5 rounded-full animate-pulse"
-        style={{
-          backgroundColor: "var(--accent-primary)",
-          boxShadow: "0 0 12px var(--accent-primary)",
-        }}
-      />
+      {!isDone && (
+        <span
+          aria-hidden="true"
+          className="inline-block w-[3px] sm:w-[4px] h-[0.95em] ml-1.5 rounded-full"
+          style={{
+            backgroundColor: "var(--accent-primary)",
+          }}
+        />
+      )}
     </span>
   );
 }
@@ -231,15 +235,15 @@ function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
 // ==========================================
 const PROFILE = {
   brand: "Home",
-  name: "Nyoman Sastrawan", // <-- Sesuaikan dengan nama lengkap Anda
+  name: "Nyoman Sastrawan",
   role: "Electrical Engineer, Full-Stack Web & IoT Developer",
   tagline: "Membangun Sistem Energi Mandiri, Otomasi IoT & Aplikasi Web Terukur",
   bio: "Lulusan Teknik Elektro dan pengembang perangkat lunak yang berfokus pada instalasi sistem energi surya off-grid, otomasi berbasis mikrokontroler ESP32, serta pengembangan aplikasi web modern.",
   avatar: "/profile.jpeg",
   cvUrl: "/cv.pdf",
-  cvFileName: "CV_Portfolio.pdf",
+  cvFileName: "CV_Nyoman_Sastrawan.pdf",
   email: "nyomsas1234@gmail.com",
-  whatsappNumber: "628789531037",
+  whatsappNumber: "6287895310357",
   web3formsKey: "",
   socials: {
     github: "https://github.com/nyomsas99",
@@ -487,6 +491,7 @@ export default function Home() {
   const [theme, setTheme] = useState<ThemeId>("ocean");
   const [mode, setMode] = useState<ModeType>("dark");
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("Semua");
   const [imgError, setImgError] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -500,6 +505,7 @@ export default function Home() {
   const [cardImgErrors, setCardImgErrors] = useState<Record<number, boolean>>({});
 
   const switcherRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -536,6 +542,7 @@ export default function Home() {
         setSelectedProject(null);
         setCvModalOpen(false);
         setThemeMenuOpen(false);
+        setMobileMenuOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -546,6 +553,9 @@ export default function Home() {
     const handleClickOutside = (event: MouseEvent) => {
       if (switcherRef.current && !switcherRef.current.contains(event.target as Node)) {
         setThemeMenuOpen(false);
+      }
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setMobileMenuOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -757,41 +767,48 @@ export default function Home() {
       style={{ color: "var(--text-primary)" }}
     >
       {/* Latar Belakang Fluid Liquid Blobs */}
+      {/* Latar Belakang Fluid Liquid Blobs (Halus & Bebas Kedip di Mobile) */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div
-          className="absolute -top-24 -left-20 w-[460px] h-[460px] blur-3xl animate-liquid transition-colors duration-700"
-          style={{ background: `radial-gradient(circle, var(--blob-1), transparent 70%)` }}
+          className="absolute -top-24 -left-20 w-[460px] h-[460px] rounded-full animate-liquid transition-colors duration-700"
+          style={{ background: `radial-gradient(circle, var(--blob-1) 0%, transparent 70%)` }}
         />
         <div
-          className="absolute top-1/3 -right-24 w-[520px] h-[520px] blur-3xl animate-liquid-slow transition-colors duration-700"
-          style={{ background: `radial-gradient(circle, var(--blob-2), transparent 70%)` }}
+          className="absolute top-1/3 -right-24 w-[520px] h-[520px] rounded-full animate-liquid-slow transition-colors duration-700"
+          style={{ background: `radial-gradient(circle, var(--blob-2) 0%, transparent 70%)` }}
         />
         <div
-          className="absolute -bottom-32 left-1/4 w-[480px] h-[480px] blur-3xl animate-liquid transition-colors duration-700"
-          style={{ background: `radial-gradient(circle, var(--blob-3), transparent 70%)` }}
+          className="absolute -bottom-32 left-1/4 w-[480px] h-[480px] rounded-full animate-liquid transition-colors duration-700"
+          style={{ background: `radial-gradient(circle, var(--blob-3) 0%, transparent 70%)` }}
         />
       </div>
 
-      {/* Floating Glass Pill Navbar */}
-      <header className="fixed top-5 inset-x-0 z-50 flex justify-center px-3">
-        <nav className="liquid-nav rounded-full px-4 sm:px-6 py-2.5 flex items-center gap-3 sm:gap-5 text-xs sm:text-sm font-medium">
+      {/* Floating Glass Pill Navbar (Responsif Mobile & Desktop) */}
+      <header
+        ref={navRef}
+        className="fixed top-4 sm:top-5 inset-x-0 z-50 flex flex-col items-center px-4"
+      >
+        <nav className="liquid-nav rounded-full w-full md:w-auto max-w-full px-4 sm:px-6 py-2.5 flex items-center justify-between md:justify-center gap-3 sm:gap-5 text-xs sm:text-sm font-medium">
+          {/* Brand */}
           <a
             href="#home"
+            onClick={() => setMobileMenuOpen(false)}
             className="font-semibold tracking-tight flex items-center gap-2 shrink-0"
             style={{ color: "var(--text-primary)" }}
           >
             <span
-              className="w-2.5 h-2.5 rounded-full transition-all duration-500"
+              className="w-2.5 h-2.5 rounded-full transition-all duration-500 shrink-0"
               style={{
                 backgroundColor: "var(--accent-primary)",
                 boxShadow: "0 0 12px var(--accent-primary)",
               }}
             />
-            <span className="hidden md:inline">{PROFILE.brand}</span>
+            <span>{PROFILE.brand}</span>
           </a>
 
+          {/* Menu Navigasi Desktop */}
           <div
-            className="flex items-center gap-3 sm:gap-5"
+            className="hidden md:flex items-center gap-5"
             style={{ color: "var(--text-secondary)" }}
           >
             <a href="#projects" className="hover:opacity-75 transition-opacity">
@@ -808,7 +825,8 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="flex items-center gap-1.5 shrink-0">
+          {/* Tombol Aksi Kanan (CV, Dark/Light & Hamburger Mobile) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               type="button"
               onClick={handleDownloadCV}
@@ -839,8 +857,50 @@ export default function Home() {
             >
               {mode === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
+
+            {/* Tombol Hamburger khusus Layar Ponsel */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              aria-label={mobileMenuOpen ? "Tutup Menu Navigasi" : "Buka Menu Navigasi"}
+              aria-expanded={mobileMenuOpen}
+              className="md:hidden p-2 rounded-full transition-all cursor-pointer hover:scale-105 active:scale-95"
+              style={{
+                backgroundColor: "var(--accent-soft)",
+                border: "1px solid var(--glass-border)",
+                color: "var(--accent-primary)",
+              }}
+            >
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
           </div>
         </nav>
+
+        {/* Dropdown Menu Navigasi Mobile */}
+        {mobileMenuOpen && (
+          <div className="md:hidden liquid-nav rounded-3xl w-full mt-2.5 p-3 shadow-2xl flex flex-col gap-1.5 text-sm font-medium">
+            {[
+              { href: "#projects", label: "Proyek" },
+              { href: "#education", label: "Pendidikan" },
+              { href: "#skills", label: "Keahlian" },
+              { href: "#contact", label: "Kontak" },
+            ].map((navItem) => (
+              <a
+                key={navItem.href}
+                href={navItem.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-2.5 rounded-2xl transition-colors flex items-center justify-between hover:opacity-80"
+                style={{
+                  color: "var(--text-primary)",
+                  backgroundColor: "var(--glass-bg-2)",
+                }}
+              >
+                <span>{navItem.label}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" style={{ color: "var(--accent-primary)" }} />
+              </a>
+            ))}
+          </div>
+        )}
       </header>
 
       {/* Modal Detail & Foto Dokumentasi Proyek */}
@@ -1239,20 +1299,20 @@ export default function Home() {
         </button>
       </div>
 
-      <main className="max-w-6xl mx-auto px-5 sm:px-8 pt-32 pb-28 space-y-24">
+      <main className="max-w-6xl mx-auto px-5 sm:px-8 pt-28 sm:pt-32 pb-28 space-y-24">
         {/* Hero Section */}
         <section id="home" className="pt-4 space-y-6">
-          <div className="liquid-glass rounded-[2.25rem] p-8 sm:p-14 relative overflow-hidden">
+          <div className="liquid-glass rounded-[2.25rem] p-7 sm:p-14 relative overflow-hidden">
             <div className="absolute -top-24 -right-24 w-72 h-72 bg-white/10 rounded-full blur-2xl pointer-events-none" />
 
-            <div className="flex flex-col-reverse lg:flex-row items-start lg:items-center justify-between gap-10">
+            <div className="flex flex-col-reverse lg:flex-row items-start lg:items-center justify-between gap-8 sm:gap-10">
               <div className="flex-1 overflow-hidden">
                 <RevealText delay={0}>
                   <div
                     className="inline-flex items-center gap-2 liquid-pill rounded-full px-4 py-1.5 text-xs font-medium mb-5"
                     style={{ color: "var(--accent-primary)" }}
                   >
-                    <Sparkles className="w-3.5 h-3.5" />
+                    <Sparkles className="w-3.5 h-3.5 shrink-0" />
                     {PROFILE.role}
                   </div>
                 </RevealText>
