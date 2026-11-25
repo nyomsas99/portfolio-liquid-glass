@@ -477,12 +477,12 @@ const SKILLS = [
   },
   {
     title: "Backend & Database",
-    items: ["PHP Native", "MySQL", "Multi-Role Auth", "RESTful API", "PDF & Excel Reporting"],
+    items: ["PHP Native","Laravel", "MySQL", "Multi-Role Auth", "RESTful API", "PDF & Excel Reporting"],
     type: "terminal",
   },
   {
     title: "Electrical, Embedded & IoT",
-    items: ["PLTS Off-Grid & MPPT", "ESP32 & Arduino Uno", "C / C++ Firmware", "RFID, Load Cell & RTC", "Servo & Relay Isolation"],
+    items: ["PLTS Off-Grid & MPPT", "ESP32 & Arduino Uno", "C / C++ Firmware", "RFID,Load Cell & RTC", "Servo & Relay Isolation","Python","PLC"],
     type: "cpu",
   },
 ];
