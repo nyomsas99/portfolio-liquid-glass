@@ -565,6 +565,27 @@ export default function Home() {
   const syncUrlParams = (newTheme: ThemeId, newMode: ModeType) => {
     window.history.replaceState(null, "", `?theme=${newTheme}&mode=${newMode}`);
   };
+  // Hapus otomatis floating badge "Powered by Netlify" (termasuk Shadow DOM)
+  useEffect(() => {
+    const removeNetlifyBadge = () => {
+      document.querySelectorAll("body > div, html > div, aside").forEach((el) => {
+        if (el.id === "__next" || el.contains(document.querySelector("main"))) return;
+        const text = (el.textContent || "") + (el.shadowRoot?.textContent || "");
+        if (
+          text.includes("Powered by Netlify") ||
+          text.includes("Hide this badge") ||
+          el.innerHTML.includes("netlify.com")
+        ) {
+          el.remove();
+        }
+      });
+    };
+
+    removeNetlifyBadge();
+    const observer = new MutationObserver(removeNetlifyBadge);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
 
   const handleSelectTheme = (newTheme: ThemeId) => {
     setTheme(newTheme);
