@@ -565,27 +565,7 @@ export default function Home() {
   const syncUrlParams = (newTheme: ThemeId, newMode: ModeType) => {
     window.history.replaceState(null, "", `?theme=${newTheme}&mode=${newMode}`);
   };
-  // Hapus otomatis floating badge "Powered by Netlify" (termasuk Shadow DOM)
-  useEffect(() => {
-    const removeNetlifyBadge = () => {
-      document.querySelectorAll("body > div, html > div, aside").forEach((el) => {
-        if (el.id === "__next" || el.contains(document.querySelector("main"))) return;
-        const text = (el.textContent || "") + (el.shadowRoot?.textContent || "");
-        if (
-          text.includes("Powered by Netlify") ||
-          text.includes("Hide this badge") ||
-          el.innerHTML.includes("netlify.com")
-        ) {
-          el.remove();
-        }
-      });
-    };
-
-    removeNetlifyBadge();
-    const observer = new MutationObserver(removeNetlifyBadge);
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-    return () => observer.disconnect();
-  }, []);
+  
 
   const handleSelectTheme = (newTheme: ThemeId) => {
     setTheme(newTheme);
@@ -1542,15 +1522,15 @@ export default function Home() {
               </p>
             </RevealText>
 
-            {/* Filter Tabs */}
-            <div className="liquid-pill rounded-full p-1.5 inline-flex flex-wrap items-center gap-1 self-start">
+            {/* Filter Tabs (Grid 2x2 rapi di HP, Pill sebaris di Desktop) */}
+            <div className="liquid-pill rounded-2xl sm:rounded-full p-1.5 grid grid-cols-2 sm:inline-flex items-center gap-1.5 w-full sm:w-auto">
               {categories.map((cat) => {
                 const active = activeFilter === cat;
                 return (
                   <button
                     key={cat}
                     onClick={() => setActiveFilter(cat)}
-                    className="px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer"
+                    className="px-3.5 py-2 sm:py-1.5 rounded-xl sm:rounded-full text-xs font-medium text-center transition-all cursor-pointer truncate"
                     style={{
                       backgroundColor: active ? "var(--btn-bg)" : "transparent",
                       color: active ? "var(--btn-text)" : "var(--text-secondary)",
@@ -1568,12 +1548,12 @@ export default function Home() {
               <RevealText key={project.id} delay={index * 100}>
                 <article
                   onClick={() => openProjectModal(project)}
-                  className="liquid-glass rounded-[1.75rem] p-7 h-full flex flex-col justify-between group hover:-translate-y-1.5 cursor-pointer"
+                  className="liquid-glass rounded-[1.75rem] p-5 sm:p-7 h-full flex flex-col justify-between group hover:-translate-y-1.5 cursor-pointer"
                 >
                   <div>
                     {!cardImgErrors[project.id] && (
                       <div
-                        className="w-full h-44 rounded-2xl overflow-hidden mb-5"
+                        className="w-full h-44 sm:h-48 rounded-2xl overflow-hidden mb-4"
                         style={{ border: "1px solid var(--glass-border)" }}
                       >
                         <img
@@ -1587,10 +1567,11 @@ export default function Home() {
                       </div>
                     )}
 
-                    <div className="flex items-center justify-between gap-2 mb-4">
-                      <div className="flex flex-wrap items-center gap-2">
+                    {/* Baris Badge & Ikon Aksi */}
+                    <div className="flex items-start justify-between gap-2 mb-3.5">
+                      <div className="flex flex-wrap items-center gap-1.5">
                         <span
-                          className="text-xs font-medium px-3 py-1 rounded-full"
+                          className="text-[11px] sm:text-xs font-medium px-2.5 py-1 rounded-full"
                           style={{
                             backgroundColor: "var(--accent-soft)",
                             border: "1px solid var(--glass-border)",
@@ -1602,7 +1583,7 @@ export default function Home() {
 
                         {project.status && (
                           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-400">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                             {project.status}
                           </span>
                         )}
@@ -1624,26 +1605,36 @@ export default function Home() {
                         >
                           <Eye className="w-4 h-4" />
                         </button>
-                        <a
-                          href={project.repoUrl}
-                          onClick={(e) => e.stopPropagation()}
-                          aria-label="Source Code"
-                          className="p-2 rounded-full hover:opacity-75 transition-opacity"
-                        >
-                          <GithubIcon className="w-4 h-4" />
-                        </a>
-                        <a
-                          href={project.demoUrl}
-                          onClick={(e) => e.stopPropagation()}
-                          aria-label="Live Demo"
-                          className="p-2 rounded-full hover:opacity-75 transition-opacity"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
+                        {project.repoUrl !== "#" && (
+                          <a
+                            href={project.repoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            aria-label="Source Code"
+                            className="p-2 rounded-full hover:opacity-75 transition-opacity"
+                          >
+                            <GithubIcon className="w-4 h-4" />
+                          </a>
+                        )}
+                        {project.demoUrl !== "#" && (
+                          <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            aria-label="Live Demo"
+                            className="p-2 rounded-full hover:opacity-75 transition-opacity"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-semibold transition-colors">{project.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold leading-snug transition-colors">
+                      {project.title}
+                    </h3>
                     <p
                       className="text-sm mt-2.5 leading-relaxed opacity-90"
                       style={{ color: "var(--text-secondary)" }}
@@ -1654,13 +1645,13 @@ export default function Home() {
 
                   <div className="mt-6 space-y-4">
                     <div
-                      className="pt-4 flex flex-wrap gap-2"
+                      className="pt-4 flex flex-wrap gap-1.5 sm:gap-2"
                       style={{ borderTop: "1px solid var(--glass-border)" }}
                     >
                       {project.tech.map((item) => (
                         <span
                           key={item}
-                          className="text-xs px-2.5 py-1 rounded-lg"
+                          className="text-[11px] sm:text-xs px-2.5 py-1 rounded-lg"
                           style={{
                             backgroundColor: "var(--glass-bg-2)",
                             border: "1px solid var(--glass-border)",
@@ -1685,6 +1676,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+        
 
         {/* Section Riwayat Pendidikan */}
         <section id="education" className="space-y-8">
