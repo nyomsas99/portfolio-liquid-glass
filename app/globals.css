@@ -321,3 +321,16 @@ body {
   animation: marqueeRtl 28s linear infinite;
   will-change: transform;
 }
+/* ==========================================
+   SEMBUNYIKAN BADGE POWERED BY NETLIFY
+   ========================================== */
+netlify-drawer,
+iframe[src*="netlify"],
+body > a[href*="netlify.com"],
+body > div:has(> a[href*="netlify.com"]),
+[data-netlify-deploy-id] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

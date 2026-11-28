@@ -1450,12 +1450,12 @@ export default function Home() {
           </div>
 
           {/* Kartu Sorotan Angka (Quick Metrics) */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
             {QUICK_METRICS.map((metric, index) => (
               <RevealText key={metric.id} delay={index * 90}>
-                <div className="liquid-glass rounded-[1.5rem] p-5 h-full flex items-start gap-3.5 hover:-translate-y-1">
+                <div className="liquid-glass rounded-[1.5rem] p-4 sm:p-5 h-full flex flex-col sm:flex-row items-start gap-3 sm:gap-3.5 hover:-translate-y-1">
                   <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                     style={{
                       backgroundColor: "var(--accent-soft)",
                       border: "1px solid var(--glass-border)",
@@ -1468,18 +1468,18 @@ export default function Home() {
                     {metric.type === "cpu" && <Cpu className="w-5 h-5" />}
                   </div>
 
-                  <div className="min-w-0">
-                    <div className="text-lg sm:text-xl font-bold tracking-tight leading-tight">
+                  <div className="w-full min-w-0">
+                    <div className="text-base sm:text-xl font-bold tracking-tight leading-tight">
                       {metric.value}
                     </div>
                     <div
-                      className="text-xs font-semibold mt-0.5 truncate"
+                      className="text-xs font-semibold mt-1 leading-snug break-words"
                       style={{ color: "var(--text-secondary)" }}
                     >
                       {metric.label}
                     </div>
                     <div
-                      className="text-[11px] mt-0.5 truncate"
+                      className="text-[11px] mt-0.5 leading-snug break-words"
                       style={{ color: "var(--text-muted)" }}
                     >
                       {metric.sublabel}
