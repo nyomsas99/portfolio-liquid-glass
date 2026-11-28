@@ -548,6 +548,27 @@ export default function Home() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+  // Hapus otomatis floating badge "Powered by Netlify" (termasuk Shadow DOM)
+  useEffect(() => {
+    const removeNetlifyBadge = () => {
+      document.querySelectorAll("body > div, html > div, aside").forEach((el) => {
+        if (el.id === "__next" || el.contains(document.querySelector("main"))) return;
+        const text = (el.textContent || "") + (el.shadowRoot?.textContent || "");
+        if (
+          text.includes("Powered by Netlify") ||
+          text.includes("Hide this badge") ||
+          el.innerHTML.includes("netlify.com")
+        ) {
+          el.remove();
+        }
+      });
+    };
+
+    removeNetlifyBadge();
+    const observer = new MutationObserver(removeNetlifyBadge);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
