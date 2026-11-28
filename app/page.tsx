@@ -549,25 +549,46 @@ export default function Home() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
   // Hapus otomatis floating badge "Powered by Netlify" (termasuk Shadow DOM)
+  // Hapus otomatis elemen luar / badge "Powered by Netlify" (termasuk Closed Shadow DOM)
   useEffect(() => {
     const removeNetlifyBadge = () => {
-      document.querySelectorAll("body > div, html > div, aside").forEach((el) => {
-        if (el.id === "__next" || el.contains(document.querySelector("main"))) return;
-        const text = (el.textContent || "") + (el.shadowRoot?.textContent || "");
+      document.querySelectorAll("html > *:not(head):not(body)").forEach((el) => el.remove());
+
+      document.querySelectorAll("body > *").forEach((el) => {
+        const tag = el.tagName;
         if (
-          text.includes("Powered by Netlify") ||
-          text.includes("Hide this badge") ||
-          el.innerHTML.includes("netlify.com")
+          el.hasAttribute("data-theme") ||
+          tag === "SCRIPT" ||
+          tag === "STYLE" ||
+          tag === "LINK" ||
+          tag === "TEMPLATE" ||
+          tag === "NEXT-ROUTE-ANNOUNCER"
         ) {
-          el.remove();
+          return;
+        }
+        el.remove();
+      });
+
+      document.querySelectorAll("*").forEach((el) => {
+        if (el instanceof HTMLElement) {
+          const style = window.getComputedStyle(el);
+          const zIndex = parseInt(style.zIndex || "0", 10);
+          if (style.position === "fixed" && zIndex > 100) {
+            el.remove();
+          }
         }
       });
     };
 
     removeNetlifyBadge();
+    const timeouts = [150, 600, 1500, 3500].map((ms) => setTimeout(removeNetlifyBadge, ms));
     const observer = new MutationObserver(removeNetlifyBadge);
     observer.observe(document.documentElement, { childList: true, subtree: true });
-    return () => observer.disconnect();
+
+    return () => {
+      timeouts.forEach(clearTimeout);
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
